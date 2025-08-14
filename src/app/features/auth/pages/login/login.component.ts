@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,7 +16,7 @@ import { LoginCredentials } from '../../models/auth.model';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule]
+  imports: [ReactiveFormsModule, RouterModule]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

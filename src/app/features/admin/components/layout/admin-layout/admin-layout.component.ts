@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -22,7 +22,7 @@ export class AdminLayoutComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    @Inject(Router) private router: Router
   ) {
     this.currentUser$ = this.authService.getCurrentUser();
   }

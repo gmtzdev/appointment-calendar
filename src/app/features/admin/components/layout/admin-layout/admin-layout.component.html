@@ -2,7 +2,7 @@
   <!-- Admin Header -->
   <header class="admin-header">
     <div class="header-left">
-      <button 
+      <button
         class="sidebar-toggle"
         (click)="toggleSidebar()"
         aria-label="Toggle sidebar">
@@ -10,83 +10,85 @@
       </button>
       <h1 class="text-lg font-bold ">Dental Admin</h1>
     </div>
-    
+
     <div class="header-right">
-      <div class="user-menu" *ngIf="currentUser$ | async as user">
-        <span class="user-name">{{ user.firstName }} {{ user.lastName }}</span>
-        <div class="user-dropdown">
-          <button class="user-avatar">
-            <img [src]="user.avatar || '/assets/default-avatar.png'" 
-                 [alt]="user.firstName + ' ' + user.lastName">
-          </button>
-          <div class="dropdown-menu">
-            <a routerLink="/admin/settings" class="dropdown-item">
-              <i class="icon-settings"></i>
-              Settings
-            </a>
-            <button (click)="logout()" class="dropdown-item logout-btn">
-              <i class="icon-logout"></i>
-              Logout
-            </button>
+      @if (currentUser$ | async; as user) {
+        <div class="user-menu">
+          <span class="user-name">{{ user.firstName }} {{ user.lastName }}</span>
+          <div class="user-dropdown">
+            <button class="user-avatar">
+              <img [src]="user.avatar || '/assets/default-avatar.png'"
+                [alt]="user.firstName + ' ' + user.lastName">
+              </button>
+              <div class="dropdown-menu">
+                <a routerLink="/admin/settings" class="dropdown-item">
+                  <i class="icon-settings"></i>
+                  Settings
+                </a>
+                <button (click)="logout()" class="dropdown-item logout-btn">
+                  <i class="icon-logout"></i>
+                  Logout
+                </button>
+              </div>
+            </div>
           </div>
+        }
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="admin-content" [class.sidebar-collapsed]="isSidebarCollapsed">
+      <!-- Admin Sidebar -->
+      <aside class="admin-sidebar" [class.collapsed]="isSidebarCollapsed">
+        <nav class="sidebar-nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a routerLink="/admin/dashboard"  routerLinkActive="active" class="nav-link">
+                <i class="icon-dashboard"></i>
+                <span class="nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/admin/patients"
+                routerLinkActive="active"
+                class="nav-link">
+                <i class="icon-patients"></i>
+                <span class="nav-text">Patients</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/admin/appointments"
+                routerLinkActive="active"
+                class="nav-link">
+                <i class="icon-calendar"></i>
+                <span class="nav-text">Appointments</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/admin/users"
+                routerLinkActive="active"
+                class="nav-link">
+                <i class="icon-users"></i>
+                <span class="nav-text">Users</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/admin/settings"
+                routerLinkActive="active"
+                class="nav-link">
+                <i class="icon-settings"></i>
+                <span class="nav-text">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="content-wrapper">
+          <router-outlet></router-outlet>
         </div>
-      </div>
+      </main>
     </div>
-  </header>
-
-  <!-- Main Content Area -->
-  <div class="admin-content" [class.sidebar-collapsed]="isSidebarCollapsed">
-    <!-- Admin Sidebar -->
-    <aside class="admin-sidebar" [class.collapsed]="isSidebarCollapsed">
-      <nav class="sidebar-nav">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a routerLink="/admin/dashboard"  routerLinkActive="active" class="nav-link">
-              <i class="icon-dashboard"></i>
-              <span class="nav-text">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/admin/patients" 
-               routerLinkActive="active"
-               class="nav-link">
-              <i class="icon-patients"></i>
-              <span class="nav-text">Patients</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/admin/appointments" 
-               routerLinkActive="active"
-               class="nav-link">
-              <i class="icon-calendar"></i>
-              <span class="nav-text">Appointments</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/admin/users" 
-               routerLinkActive="active"
-               class="nav-link">
-              <i class="icon-users"></i>
-              <span class="nav-text">Users</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/admin/settings" 
-               routerLinkActive="active"
-               class="nav-link">
-              <i class="icon-settings"></i>
-              <span class="nav-text">Settings</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <div class="content-wrapper">
-        <router-outlet></router-outlet>
-      </div>
-    </main>
   </div>
-</div>

@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class DashboardComponent implements OnInit {
-  dashboardData$: Observable<DashboardData> | undefined;
+  dashboardData$!: Observable<DashboardData>;
   isLoading = true;
 
   constructor(private userService: UserService) {}

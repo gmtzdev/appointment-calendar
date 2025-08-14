@@ -24,76 +24,86 @@
             [class.error]="hasFieldError('email', 'required') || hasFieldError('email', 'email')"
             placeholder="Enter your email address"
             autocomplete="email">
+          </div>
+          @if (getFieldErrorMessage('email')) {
+            <div class="error-message">
+              {{ getFieldErrorMessage('email') }}
+            </div>
+          }
         </div>
-        <div class="error-message" *ngIf="getFieldErrorMessage('email')">
-          {{ getFieldErrorMessage('email') }}
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-wrapper">
+            <i class="input-icon">🔒</i>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              class="form-input"
+              [class.error]="hasFieldError('password', 'required') || hasFieldError('password', 'minlength')"
+              placeholder="Enter your password"
+              autocomplete="current-password">
+            </div>
+            @if (getFieldErrorMessage('password')) {
+              <div class="error-message">
+                {{ getFieldErrorMessage('password') }}
+              </div>
+            }
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="form-options">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" class="checkbox">
+              <span class="checkbox-text">Remember me</span>
+            </label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <!-- Error Message -->
+          @if (errorMessage) {
+            <div class="alert error-alert">
+              <i class="alert-icon">⚠️</i>
+              <span>{{ errorMessage }}</span>
+            </div>
+          }
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="login-button"
+            [disabled]="isLoading || loginForm.invalid"
+            [class.loading]="isLoading">
+            @if (!isLoading) {
+              <span>Sign In</span>
+            }
+            @if (isLoading) {
+              <span class="loading-content">
+                <i class="loading-spinner"></i>
+                Signing in...
+              </span>
+            }
+          </button>
+        </form>
+
+        <!-- Footer Section -->
+        <div class="login-footer">
+          <p class="footer-text">
+            Don't have an account?
+            <a href="#" class="register-link">Contact administrator</a>
+          </p>
+          <div class="app-version">
+            <small>Version 1.0.0</small>
+          </div>
         </div>
       </div>
 
-      <!-- Password Field -->
-      <div class="form-group">
-        <label for="password" class="form-label">Password</label>
-        <div class="input-wrapper">
-          <i class="input-icon">🔒</i>
-          <input
-            id="password"
-            type="password"
-            formControlName="password"
-            class="form-input"
-            [class.error]="hasFieldError('password', 'required') || hasFieldError('password', 'minlength')"
-            placeholder="Enter your password"
-            autocomplete="current-password">
-        </div>
-        <div class="error-message" *ngIf="getFieldErrorMessage('password')">
-          {{ getFieldErrorMessage('password') }}
-        </div>
-      </div>
-
-      <!-- Remember Me & Forgot Password -->
-      <div class="form-options">
-        <label class="checkbox-wrapper">
-          <input type="checkbox" class="checkbox">
-          <span class="checkbox-text">Remember me</span>
-        </label>
-        <a href="#" class="forgot-link">Forgot password?</a>
-      </div>
-
-      <!-- Error Message -->
-      <div class="alert error-alert" *ngIf="errorMessage">
-        <i class="alert-icon">⚠️</i>
-        <span>{{ errorMessage }}</span>
-      </div>
-
-      <!-- Submit Button -->
-      <button
-        type="submit"
-        class="login-button"
-        [disabled]="isLoading || loginForm.invalid"
-        [class.loading]="isLoading">
-        <span *ngIf="!isLoading">Sign In</span>
-        <span *ngIf="isLoading" class="loading-content">
-          <i class="loading-spinner"></i>
-          Signing in...
-        </span>
-      </button>
-    </form>
-
-    <!-- Footer Section -->
-    <div class="login-footer">
-      <p class="footer-text">
-        Don't have an account? 
-        <a href="#" class="register-link">Contact administrator</a>
-      </p>
-      <div class="app-version">
-        <small>Version 1.0.0</small>
+      <!-- Background Elements -->
+      <div class="background-pattern">
+        <div class="pattern-circle circle-1"></div>
+        <div class="pattern-circle circle-2"></div>
+        <div class="pattern-circle circle-3"></div>
       </div>
     </div>
-  </div>
-
-  <!-- Background Elements -->
-  <div class="background-pattern">
-    <div class="pattern-circle circle-1"></div>
-    <div class="pattern-circle circle-2"></div>
-    <div class="pattern-circle circle-3"></div>
-  </div>
-</div>
