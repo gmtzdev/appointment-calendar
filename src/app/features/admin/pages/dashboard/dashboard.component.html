@@ -1,0 +1,130 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h2 class="page-title">Dashboard</h2>
+    <button class="refresh-btn" (click)="refreshData()" [disabled]="isLoading">
+      <i class="icon-refresh" [class.spinning]="isLoading"></i>
+      Refresh
+    </button>
+  </div>
+
+  <div class="dashboard-content" *ngIf="!isLoading">
+    <div class="stats-grid" *ngIf="dashboardData$ | async as data">
+      <!-- Total Users Card -->
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3 class="stat-title">Total Users</h3>
+          <i class="stat-icon icon-users"></i>
+        </div>
+        <div class="stat-value">{{ data.totalUsers }}</div>
+        <div class="stat-change" [class.positive]="data.userGrowth > 0" [class.negative]="data.userGrowth < 0">
+          <i class="icon-arrow-up" *ngIf="data.userGrowth > 0"></i>
+          <i class="icon-arrow-down" *ngIf="data.userGrowth < 0"></i>
+          {{ data.userGrowth }}% vs last month
+        </div>
+      </div>
+
+      <!-- Active Users Card -->
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3 class="stat-title">Active Users</h3>
+          <i class="stat-icon icon-active"></i>
+        </div>
+        <div class="stat-value">{{ data.activeUsers }}</div>
+        <div class="stat-change">
+          {{ ((data.activeUsers / data.totalUsers) * 100).toFixed(1) }}% of total
+        </div>
+      </div>
+
+      <!-- Appointments Today Card -->
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3 class="stat-title">Appointments Today</h3>
+          <i class="stat-icon icon-calendar"></i>
+        </div>
+        <div class="stat-value">12</div>
+        <div class="stat-change positive">
+          <i class="icon-arrow-up"></i>
+          +2 vs yesterday
+        </div>
+      </div>
+
+      <!-- Revenue Card -->
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3 class="stat-title">Monthly Revenue</h3>
+          <i class="stat-icon icon-dollar"></i>
+        </div>
+        <div class="stat-value">$8,420</div>
+        <div class="stat-change positive">
+          <i class="icon-arrow-up"></i>
+          +15% vs last month
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="dashboard-section" *ngIf="dashboardData$ | async as data">
+      <h3 class="section-title">Recent Users</h3>
+      <div class="recent-users">
+        <div class="user-item" *ngFor="let user of data.recentUsers">
+          <div class="user-avatar">
+            <img [src]="user.avatar || '/assets/default-avatar.png'" 
+                 [alt]="user.firstName + ' ' + user.lastName">
+          </div>
+          <div class="user-info">
+            <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
+            <div class="user-role">{{ user.role }}</div>
+            <!-- <div class="user-role">{{ user.role | titlecase }}</div> -->
+          </div>
+          <div class="user-status" [class.active]="user.isActive" [class.inactive]="!user.isActive">
+            {{ user.isActive ? 'Active' : 'Inactive' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="dashboard-section">
+      <h3 class="section-title">Quick Actions</h3>
+      <div class="quick-actions">
+        <a routerLink="/admin/users" class="action-card">
+          <i class="action-icon icon-users"></i>
+          <div class="action-content">
+            <h4>Manage Users</h4>
+            <p>Add, edit, or deactivate user accounts</p>
+          </div>
+        </a>
+        
+        <a routerLink="/admin/patients" class="action-card">
+          <i class="action-icon icon-patients"></i>
+          <div class="action-content">
+            <h4>Manage Patients</h4>
+            <p>View and update patient information</p>
+          </div>
+        </a>
+        
+        <a routerLink="/admin/appointments" class="action-card">
+          <i class="action-icon icon-calendar"></i>
+          <div class="action-content">
+            <h4>Schedule Appointments</h4>
+            <p>Book and manage patient appointments</p>
+          </div>
+        </a>
+        
+        <a routerLink="/admin/settings" class="action-card">
+          <i class="action-icon icon-settings"></i>
+          <div class="action-content">
+            <h4>System Settings</h4>
+            <p>Configure application preferences</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="loading-spinner"></div>
+    <p>Loading dashboard data...</p>
+  </div>
+</div>

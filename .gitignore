@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
+# Documentation
+COPILOT_RULES.md
+LAZY_LOADING_SETUP.md
+LOGIN_SYSTEM.md
+ADMIN_STRUCTURE.md
