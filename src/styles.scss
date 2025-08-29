@@ -1,2 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
 @use "tailwindcss";
+
+:root {
+  /* Primary Colors */
+  --color-primary: #274272;
+  --color-primary-alt: #6c90c3;
+
+  --color-primary-dark: #0d1433;
+  --color-primary-dark-alt: #171f55;
+
+  /* Text Colors */
+  --color-text-primary: #222831;      // Main text
+  --color-text-secondary: #283b48;    // Subtle/secondary text
+  --color-text-accent: #00a6c0;       // Highlighted or link text
+  --color-text-disabled: #b0b0b0;     // Disabled text
+
+  /* Secondary Colors */
+  --color-secondary: #764ba2;
+  --color-secondary-light: #b3a1d7;
+
+  /* Accent Colors */
+  --color-accent: #00c9a7;
+  --color-accent-light: #5fffd7;
+
+  /* Neutral Colors */
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-border: #e0e0e0;
+  --color-text: #333333;
+  --color-text-light: #666666;
+
+  /* Status Colors */
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #e74c3c;
+  --color-info: #17a2b8;
+}
+
+
+.my-app-dark{
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cccccc;    // Subtle/secondary text
+  --color-text-contrast: #000000;    // Text on light backgrounds
+  --color-text-accent: #00a6c0;       // Highlighted or link text
+  --color-text-disabled: #b0b0b0;     // Disabled text
+}
+
+
+body {
+  color: var(--color-text-primary);
+}
+
+
