@@ -162,4 +162,21 @@ export class AuthService {
       return null;
     }
   }
+
+
+  /**
+   * Request password reset user with email
+   * @return Observable with the confirmation accept or deny
+   */
+  passwordReset(email: string){
+    return this.http.post<{ user: User; token: string }>(`${this.apiUrl}/passwordReset`, {
+      email
+    }).pipe(
+      tap(response => {
+        // Store token and user data
+        localStorage.setItem('auth_token', response.token);
+        localStorage.setItem('current_user', JSON.stringify(response.user));
+      })
+    );
+  }
 }

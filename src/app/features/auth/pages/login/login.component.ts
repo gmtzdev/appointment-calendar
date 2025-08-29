@@ -13,10 +13,9 @@ import { LoginCredentials } from '../../models/auth.model';
  */
 @Component({
   selector: 'app-login',
-  standalone: true,
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ReactiveFormsModule, RouterModule]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

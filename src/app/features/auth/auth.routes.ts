@@ -12,15 +12,14 @@ export const authRoutes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.component')
-      .then(c => c.LoginComponent)
-  }
+    loadComponent: () => import('./pages/login/login.component').then(c => c.LoginComponent)
+  },
+  {
+    path: 'forgot-password',
+    loadComponent: () => import('./pages/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent)
+  },
   // TODO: Add more auth routes as needed
-  // {
-  //   path: 'forgot-password',
-  //   loadComponent: () => import('./pages/forgot-password/forgot-password.component')
-  //     .then(c => c.ForgotPasswordComponent)
-  // },
+  
   // {
   //   path: 'reset-password',
   //   loadComponent: () => import('./pages/reset-password/reset-password.component')
